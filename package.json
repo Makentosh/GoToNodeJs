@@ -1,15 +1,27 @@
 {
-  "name": "nodejscourse",
+  "name": "NodeJSCourse",
   "version": "1.0.0",
-  "description": "go to node js",
+  "description": "",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "vasyl batig",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Makentosh/GoToNodeJs.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "nodemon": "^2.0.5"
-  }
+  "bugs": {
+    "url": "https://github.com/Makentosh/GoToNodeJs/issues"
+  },
+  "homepage": "https://github.com/Makentosh/GoToNodeJs#readme"
 }
