@@ -19,7 +19,7 @@ app.set('view engine', 'hbs')
 app.set('views', 'views')
 //set express statis folder to css & js files
 app.use(express.static('public'))
-
+app.use(express.urlencoded({extended: true}))
 //routes to page
 app.use('/', homeRoutes)
 app.use('/courses', coursesRoutes)
