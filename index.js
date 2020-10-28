@@ -1,7 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const app = express()
-
+const homeRoutes = require('./routes/home')
+const coursesRoutes = require('./routes/courses')
+const addRoutes = require('./routes/add')
 
 //configuration handlebars
 const hbs = exphbs.create({
@@ -18,21 +20,13 @@ app.set('views', 'views')
 //set express statis folder to css & js files
 app.use(express.static('public'))
 
-
-
 //routes to page
+app.use('/', homeRoutes)
+app.use('/courses', coursesRoutes)
+app.use('/add', addRoutes)
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-app.get('/about', (req, res) => {
-  res.render('about')
-})
 
 const PORT = process.env.PORT || 3000
 
 //start express server
-app.listen(PORT, () => {
-
-})
+app.listen(PORT, () => {})

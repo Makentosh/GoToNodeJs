@@ -2,15 +2,22 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Courses NodeJs APP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li>
-        <a href="/">Главная</a>
-      </li>
-      <li>
-        <a href="/courses">Курси</a>
-      </li>
-      <li>
-        <a href="/add">Добвить курс</a>
-      </li>
+      {{#if isHome}}
+        <li class="active"><a href="/">Главная</a></li>
+        {{else}}
+        <li><a href="/">Главная</a></li>
+      {{/if}}
+
+      {{#if isCourses}}
+        <li class="active"><a href="/courses">Курси</a></li>
+        {{else}}
+        <li><a href="/courses">Курси</a></li>
+      {{/if}}
+      {{#if isAdd}}
+        <li class="active"><a href="/add">Добвить курс</a></li>
+        {{else}}
+        <li><a href="/add">Добвить курс</a></li>
+      {{/if}}
     </ul>
   </div>
 </nav>
