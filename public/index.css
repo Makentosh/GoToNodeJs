@@ -25,3 +25,19 @@
 .course .price.big {
     font-size: 2rem;
 }
+
+.card-action.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card a {
+    font-size: 13px;
+    margin-right: 16px;
+}
+
+td .price {
+    margin: 0;
+    font-size: 1rem;
+}

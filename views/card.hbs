@@ -1,0 +1,39 @@
+<h1>{{title}}</h1>
+
+
+{{#if courses.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Действие</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each courses}}
+      <tr>
+        <td>{{title}}</td>
+        <td>{{count}}</td>
+        <td><p class="price">{{price}}</p></td>
+        <td>
+          <button class="btn btn-primary">Удалить</button>
+        </td>
+        <td></td>
+      </tr>
+    {{/each}}
+    <tr>
+      <td>Всего</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><p class="price">{{price}}</p></td>
+    </tr>
+    </tbody>
+  </table>
+
+{{else}}
+<p>Корзина пуста</p>
+{{/if}}
