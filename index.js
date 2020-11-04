@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const path = require('path')
 const app = express()
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
@@ -19,7 +20,7 @@ app.set('view engine', 'hbs')
 //set default views folder
 app.set('views', 'views')
 //set express statis folder to css & js files
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 //routes to page
 app.use('/', homeRoutes)

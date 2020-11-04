@@ -41,3 +41,8 @@ td .price {
     margin: 0;
     font-size: 1rem;
 }
+
+.card .card-image img {
+    max-height: 100px;
+    object-fit: contain;
+}
