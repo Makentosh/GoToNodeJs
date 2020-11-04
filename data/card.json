@@ -1,1 +1,12 @@
-{"courses":[{"title":"Angular8","price":"566","img":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png","id":"6cdaeddb-b462-46a1-8b05-52be34cb32eb","count":1}],"price":566}
+{
+  "courses": [
+    {
+      "title": "Angular8",
+      "price": "566",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png",
+      "id": "6cdaeddb-b462-46a1-8b05-52be34cb32eb",
+      "count": 1
+    }
+  ],
+  "price": 566
+}

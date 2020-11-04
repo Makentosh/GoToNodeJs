@@ -6,6 +6,7 @@ const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const addRoutes = require('./routes/add')
 const cardRoutes = require('./routes/card')
+const mongoose = require('mongoose')
 
 //configuration handlebars
 const hbs = exphbs.create({
@@ -28,8 +29,25 @@ app.use('/courses', coursesRoutes)
 app.use('/add', addRoutes)
 app.use('/card', cardRoutes)
 
-
+const password = 'IezImG4Cp34XpZbg'
+const url = `mongodb+srv://vasylbatig:${password}@cluster0.oslcz.mongodb.net/shop?&w=majority`
 const PORT = process.env.PORT || 3000
 
-//start express server
-app.listen(PORT, () => {})
+async function start() {
+  try {
+    await mongoose.connect(url, {useNewUrlParser: true})
+    //start express server
+    app.listen(PORT, () => {})
+  } catch (e) {
+    console.log(e)
+  }
+
+}
+
+start()
+
+
+
+
+
+

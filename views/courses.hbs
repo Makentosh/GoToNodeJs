@@ -1,4 +1,4 @@
-<h1>Курсы</h1>
+<h1>{{title}}</h1>
 
 
 {{#if courses.length }}
@@ -17,12 +17,12 @@
             <p class="price">{{price}}</p>
             </div>
             <div class="card-action actions">
-              <a href="/courses/{{id}}" target="_blank">Открыть курс</a>
-              <a href="/courses/{{id}}/edit?allow=true">Редактировать</a>
+              <a href="/courses/{{_id}}" target="_blank">Открыть курс</a>
+              <a href="/courses/{{_id}}/edit?allow=true">Редактировать</a>
 
               <form action="/card/add" method="post">
                 <button type="submit" class="btn btn-primary">Купить</button>
-                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="id" value="{{_id}}">
               </form>
 
             </div>
