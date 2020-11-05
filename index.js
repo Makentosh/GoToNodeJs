@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 3000
 
 async function start() {
   try {
-    await mongoose.connect(url, {useNewUrlParser: true})
+    await mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: true, useUnifiedTopology: true })
     //start express server
     app.listen(PORT, () => {})
   } catch (e) {

@@ -46,3 +46,7 @@ td .price {
     max-height: 100px;
     object-fit: contain;
 }
+
+.course-form {
+    margin-bottom: 2rem;
+}
