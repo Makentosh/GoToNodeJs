@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const session = require('express-session')
 const path = require('path')
 const app = express()
 const homeRoutes = require('./routes/home')
@@ -10,6 +11,7 @@ const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const mongoose = require('mongoose')
 const User = require('./models/user')
+const varMiddelware = require('./middlewaer/variables')
 
 //configuration handlebars
 const hbs = exphbs.create({
@@ -44,6 +46,17 @@ app.use(async (req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 
+//configure session
+
+app.use(session({
+  secret: 'some secret code',
+  resave: false,
+  saveUninitialized: false
+}))
+
+
+//add middleware
+app.use(varMiddelware)
 
 //routes to page
 app.use('/', homeRoutes)
