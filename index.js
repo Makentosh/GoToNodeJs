@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
+const MongoStore = require('connect-mongodb-session')(session)
 const path = require('path')
 const app = express()
 const homeRoutes = require('./routes/home')
@@ -12,11 +13,22 @@ const authRoutes = require('./routes/auth')
 const mongoose = require('mongoose')
 const User = require('./models/user')
 const varMiddelware = require('./middlewaer/variables')
+const userMiddelware = require('./middlewaer/user')
+
+const password = 'IezImG4Cp34XpZbg'
+const MONGODB_URL = `mongodb+srv://vasylbatig:${password}@cluster0.oslcz.mongodb.net/shop?&w=majority`
+const PORT = process.env.PORT || 9000
+
 
 //configuration handlebars
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs'
+})
+
+const store = new MongoStore({
+  collection: 'sessions',
+  uri: MONGODB_URL,
 })
 
 
@@ -28,19 +40,6 @@ app.set('view engine', 'hbs')
 //set default views folder
 app.set('views', 'views')
 
-app.use(async (req, res, next) => {
-  try {
-    let _id = new mongoose.Types.ObjectId('5fa41913a017e55960b09f38');
-    let user = await User.findById(_id)
-
-    req.user = user
-    next()
-
-  } catch (e) {
-    console.log(e)
-  }
-})
-
 
 //set express statis folder to css & js files
 app.use(express.static(path.join(__dirname, 'public')))
@@ -51,12 +50,14 @@ app.use(express.urlencoded({extended: true}))
 app.use(session({
   secret: 'some secret code',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store,
 }))
 
 
 //add middleware
 app.use(varMiddelware)
+app.use(userMiddelware)
 
 //routes to page
 app.use('/', homeRoutes)
@@ -67,28 +68,10 @@ app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
 
 
-const password = 'IezImG4Cp34XpZbg'
-const url = `mongodb+srv://vasylbatig:${password}@cluster0.oslcz.mongodb.net/shop?&w=majority`
-const PORT = process.env.PORT || 9000
-
-
-
-
 
 async function start() {
   try {
-    await mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
-    const candidate = await User.findOne()
-
-    if(!candidate) {
-      const user = new User({
-        email: 'vasya@mail.yu',
-        name: 'VasyaBatig',
-        cart: {items: []}
-      })
-
-      await user.save()
-    }
+    await mongoose.connect(MONGODB_URL, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
 
     //start express server
     app.listen(PORT, () => {})

@@ -1,18 +1,21 @@
 const {Router} = require('express')
+const auth = require('../middlewaer/auth')
 const router = Router()
 const Order = require('../models/order')
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const orders = await Order.find({'user.userId': req.user._id}).lean().populate('user.userId')
 
     res.render('orders', {
       title: 'Закази',
       isOrders: true,
-      orders: orders.map(o => ({...o, price: o.courses
-            .reduce((total,c ) => {
-            return total += c.count * c.course.price
-            }, 0)}))
+      orders: orders.map(o => ({
+        ...o, price: o.courses
+            .reduce((total, c) => {
+              return total += c.count * c.course.price
+            }, 0)
+      }))
     })
 
   } catch (e) {
@@ -21,7 +24,7 @@ router.get('/', async (req, res) => {
 
 })
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
   try {
     const user = await req.user
