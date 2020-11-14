@@ -18,7 +18,9 @@
           <td>{{title}}</td>
           <td>{{count}}</td>
           <td>
-            <button class="btn btn-small js-remove" data-id="{{_id}}">Удалить</button>
+            <button class="btn btn-small js-remove"
+                    data-csrf="{{@root.csrf}}"
+                    data-id="{{_id}}">Удалить</button>
           </td>
           <td></td>
         </tr>
@@ -32,6 +34,7 @@
       <button type="submit" class="btn">
         Сделать заказ
       </button>
+      <input type="hidden" name="_csrf" value="{{@root.csrf}}">
     </form>
 
   {{else}}

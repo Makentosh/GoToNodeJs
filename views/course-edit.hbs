@@ -21,6 +21,8 @@
 
   <input type="hidden" name="id" value="{{course._id}}">
 
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+
   <button type="submit"
           class="btn btn-primary">Редактировать курс</button>
 </form>
@@ -29,4 +31,6 @@
   <button type="submit"
           class="btn red">Удалить курс</button>
   <input type="hidden" name="id" value="{{course._id}}">
+
+  <input type="hidden" name="_csrf" value="{{csrf}}">
 </form>
