@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongodb-session')(session)
 const path = require('path')
 const app = express()
 const csrf = require('csurf')
+const flash = require('connect-flash')
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const addRoutes = require('./routes/add')
@@ -12,7 +13,6 @@ const cardRoutes = require('./routes/card')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const mongoose = require('mongoose')
-const User = require('./models/user')
 const varMiddelware = require('./middlewaer/variables')
 const userMiddelware = require('./middlewaer/user')
 
@@ -58,6 +58,7 @@ app.use(session({
 
 //add middleware
 app.use(csrf())
+app.use(flash())
 app.use(varMiddelware)
 app.use(userMiddelware)
 

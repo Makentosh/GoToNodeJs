@@ -12,6 +12,9 @@
     </div>
     <div id="login" class="col s6 offset-s3">
       <form action="/auth/login" method="post">
+        {{#if loginError}}
+          <p class="alert">{{loginError}}</p>
+        {{/if}}
         <h3>Войти в магазин</h3>
         <div class="input-field">
           <input id="email" type="email" name="email" class="validate" required>
@@ -34,6 +37,9 @@
 
     <div id="register" class="col s6 offset-s3">
       <form action="/auth/register" method="post">
+        {{#if registerError}}
+          <p class="alert">{{registerError}}</p>
+        {{/if}}
         <h3>Создать аккаунт</h3>
         <div class="input-field">
           <input id="remail" type="email" name="email" class="validate" required>
