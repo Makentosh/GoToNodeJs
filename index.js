@@ -15,9 +15,8 @@ const authRoutes = require('./routes/auth')
 const mongoose = require('mongoose')
 const varMiddelware = require('./middlewaer/variables')
 const userMiddelware = require('./middlewaer/user')
+const {MONGODB_URL, SESSION_SECRET}  = require('./keys/index')
 
-const password = 'IezImG4Cp34XpZbg'
-const MONGODB_URL = `mongodb+srv://vasylbatig:${password}@cluster0.oslcz.mongodb.net/shop?&w=majority`
 const PORT = process.env.PORT || 9000
 
 
@@ -49,7 +48,7 @@ app.use(express.urlencoded({extended: true}))
 //configure session
 
 app.use(session({
-  secret: 'some secret code',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store,
