@@ -23,7 +23,8 @@ const PORT = process.env.PORT || 9000
 //configuration handlebars
 const hbs = exphbs.create({
   defaultLayout: 'main',
-  extname: 'hbs'
+  extname: 'hbs',
+  helpers: require('./utils/hbs-helpers')
 })
 
 const store = new MongoStore({
