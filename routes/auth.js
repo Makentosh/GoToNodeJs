@@ -2,7 +2,21 @@ const {Router} = require('express')
 const User = require('../models/user')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer')
+const sendgrid = require('nodemailer-sendgrid-transport')
+const regEmail = require('../emails/registration')
 const router = Router()
+
+
+let transporter = nodemailer.createTransport({
+  host: 'smtp.mailtrap.io',
+  port: 2525,
+  auth: {
+    user: 'a40ae40cc9d4b9',
+    pass: '74d8de8e09b298'
+  }
+});
+
 
 router.get('/login', async (req, res) => {
 
@@ -19,14 +33,14 @@ router.post('/login', async (req, res) => {
     const {email, password} = req.body
     const candidate = await User.findOne({email})
 
-    if(candidate) {
+    if (candidate) {
       const areSame = await bcrypt.compare(password, candidate.password)
 
-      if(areSame) {
+      if (areSame) {
         req.session.user = candidate
         req.session.isAuthenticated = true
         req.session.save(err => {
-          if(err) {
+          if (err) {
             throw err
           }
           res.redirect('/')
@@ -58,7 +72,7 @@ router.post('/register', async (req, res) => {
     const {email, password, confirm, name} = req.body
     const candidate = await User.findOne({email})
 
-    if(candidate) {
+    if (candidate) {
       req.flash('register-error', 'Пользователь с таким email уже существует')
       res.redirect('/auth/login#register')
     } else {
@@ -72,13 +86,14 @@ router.post('/register', async (req, res) => {
 
       await user.save()
       res.redirect('/auth/login#login')
+      //send email
+      await transporter.sendMail(regEmail(email));
     }
 
   } catch (e) {
     console.log(e)
   }
 })
-
 
 
 module.exports = router
