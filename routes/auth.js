@@ -4,9 +4,12 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
+const {validationResult} = require('express-validator')
 const sendgrid = require('nodemailer-sendgrid-transport')
 const regEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
+const {registerValidators} = require('../utils/validators')
+
 const router = Router()
 
 
@@ -49,12 +52,12 @@ router.post('/login', async (req, res) => {
         })
 
       } else {
-        req.flash('login-error', 'Неверний пароль')
+        req.flash('loginError', 'Неверний пароль')
         res.redirect('/auth/login#login')
       }
 
     } else {
-      req.flash('login-error', 'Такого пользователя не существует')
+      req.flash('loginError', 'Такого пользователя не существует')
       res.redirect('/auth/login#login')
     }
   } catch (e) {
@@ -69,13 +72,20 @@ router.get('/logout', async (req, res) => {
   })
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', registerValidators, async (req, res) => {
   try {
     const {email, password, confirm, name} = req.body
     const candidate = await User.findOne({email})
 
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+      req.flash('registerError', errors.array()[0].msg)
+      return res.status(422).redirect('/auth/login#register')
+    }
+
     if (candidate) {
-      req.flash('register-error', 'Пользователь с таким email уже существует')
+      req.flash('registerError', 'Пользователь с таким email уже существует')
       res.redirect('/auth/login#register')
     } else {
       const hashPassword = await bcrypt.hash(password, 10)
