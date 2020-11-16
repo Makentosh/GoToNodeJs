@@ -28,8 +28,8 @@ router.get('/login', async (req, res) => {
   res.render('auth/login', {
     title: 'Авторизация',
     isLogin: true,
-    loginError: req.flash('login-error'),
-    registerError: req.flash('register-error')
+    loginError: req.flash('loginError'),
+    registerError: req.flash('registerError')
   })
 })
 
@@ -80,8 +80,8 @@ router.post('/register', registerValidators, async (req, res) => {
 
     if (!errors.isEmpty()) {
       req.flash('registerError', errors.array()[0].msg)
-
-      return res.status(422).redirect('/auth/login#register')
+      res.status(422)
+      return res.redirect('/auth/login#register')
     }
 
     const hashPassword = await bcrypt.hash(password, 10)
