@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js http://localhost:9000/"
   },
   "repository": {
     "type": "git",

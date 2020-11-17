@@ -80,8 +80,8 @@ router.post('/register', registerValidators, async (req, res) => {
 
     if (!errors.isEmpty()) {
       req.flash('registerError', errors.array()[0].msg)
-      res.status(422)
-      return res.redirect('/auth/login#register')
+
+      return  res.status(422).redirect('/auth/login#register')
     }
 
     const hashPassword = await bcrypt.hash(password, 10)
