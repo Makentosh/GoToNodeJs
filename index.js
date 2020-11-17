@@ -15,6 +15,7 @@ const authRoutes = require('./routes/auth')
 const mongoose = require('mongoose')
 const varMiddelware = require('./middlewaer/variables')
 const userMiddelware = require('./middlewaer/user')
+const errorMiddelware = require('./middlewaer/error')
 const {MONGODB_URL, SESSION_SECRET}  = require('./keys/index')
 
 const PORT = process.env.PORT || 9000
@@ -70,6 +71,9 @@ app.use('/add', addRoutes)
 app.use('/card', cardRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+
+//404 middelware
+app.use(errorMiddelware)
 
 
 
