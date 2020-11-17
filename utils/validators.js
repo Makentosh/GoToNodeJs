@@ -35,3 +35,14 @@ exports.registerValidators = [
       .trim()
 
 ]
+
+exports.loginValidators = [
+  body('email')
+      .isEmail()
+      .withMessage('Неверний емейл')
+      .normalizeEmail(),
+  body('password', 'Неверний пароль')
+      .isLength({min: 6, max: 56})
+      .isAlphanumeric()
+      .trim(),
+]

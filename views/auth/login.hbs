@@ -11,19 +11,19 @@
       </ul>
     </div>
     <div id="login" class="col s6 offset-s3">
-      <form action="/auth/login" method="post">
+      <form action="/auth/login" method="post" novalidate>
         {{#if loginError}}
           <p class="alert">{{loginError}}</p>
         {{/if}}
         <h3>Войти в магазин</h3>
         <div class="input-field">
-          <input id="email" type="email" name="email" class="validate" required>
+          <input id="email" type="email" name="email" class="validate">
           <label for="email">Email</label>
           <span class="helper-text" data-error="Введите email"></span>
         </div>
 
         <div class="input-field">
-          <input id="password" type="password" name="password" class="validate" required>
+          <input id="password" type="password" name="password" class="validate">
           <label for="password">Пароль</label>
           <span class="helper-text" data-error="Введите пароль"></span>
         </div>
