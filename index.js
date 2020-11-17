@@ -12,10 +12,12 @@ const addRoutes = require('./routes/add')
 const cardRoutes = require('./routes/card')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
+const prfileRoutes = require('./routes/profile')
 const mongoose = require('mongoose')
 const varMiddelware = require('./middlewaer/variables')
 const userMiddelware = require('./middlewaer/user')
 const errorMiddelware = require('./middlewaer/error')
+const fileMiddelware = require('./middlewaer/file')
 const {MONGODB_URL, SESSION_SECRET}  = require('./keys/index')
 
 const PORT = process.env.PORT || 9000
@@ -57,6 +59,9 @@ app.use(session({
 }))
 
 
+//uploadfile
+app.use(fileMiddelware.single('avatar'))
+
 //add middleware
 app.use(csrf())
 app.use(flash())
@@ -71,6 +76,7 @@ app.use('/add', addRoutes)
 app.use('/card', cardRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+app.use('/profile', prfileRoutes)
 
 //404 middelware
 app.use(errorMiddelware)
