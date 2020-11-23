@@ -47,7 +47,7 @@ app.set('views', 'views')
 
 //set express statis folder to css & js files
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('images', express.static(path.join(__dirname, 'images')))
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended: true}))
 
 //configure session

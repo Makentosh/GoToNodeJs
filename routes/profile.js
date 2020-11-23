@@ -26,7 +26,7 @@ router.post('/', auth, async(req, res) => {
     }
 
     if(req.file) {
-      toChange.avatarUrl = req.file.path
+      toChange.avatarUrl = `images/${req.file.originalname}`
     }
 
 
