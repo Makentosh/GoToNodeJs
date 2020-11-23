@@ -68,4 +68,9 @@ if ($card) {
   })
 }
 
-M.Tabs.init(document.querySelectorAll('.tabs'));
+const tabs = document.querySelectorAll('.tabs')
+
+if(tabs) {
+  M.Tabs.init(tabs);
+}
+
